@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+{% block content %}
+{% if items !=[] %}
+<div class="row">
+    <div class="col-md-1"></div>
+    <h2>Books by {{author.name}}</h2>
+    <a href='{{url_for('newBookEntry', author_id = author.id ) }}'>Add a new book</a>
+    {% for b in books %}
+    <div class="singleBook">
+        <a href='{{url_for('showBookInformation', author_id = author.id, book_title=b.title ) }}'>
+            <h3> {{b.title}} </h3>
+            <a href='{{url_for(".editBookInformation", author_id = author.id, book_title=b.title ) }}'>Edit</a>
+            <a href='{{url_for('deleteBook', author_id = author.id, book_title=b.title ) }}'>Delete</a>
+        </a>
+    </div>
+    {% endfor %}
+    <div class="col-md-1"></div>
+</div>
+{% endif %}
+{% endblock %}

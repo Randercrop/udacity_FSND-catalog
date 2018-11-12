@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+{% block content %}
+{% if book %}
+<div class="page-wrapper">
+    <h2>{{book.title}}</h2>
+    <p><span>Publication Year:</span> {{book.pub_Year}}</p>
+    <p><i>"{{book.blurb}}"</i></p>
+
+    <a href='{{url_for(".editBookInformation", author_id = author.id, book_title=book.title ) }}'>Edit</a>
+    or
+    <a href='{{url_for('deleteBook', author_id = author.id, book_title=book.title ) }}'>Delete</a>
+    this entry
+</div>
+{% endif %}
+{% endblock %}

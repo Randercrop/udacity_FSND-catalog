@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+{% block content %}
+	<a href="{{url_for('newAuthor')}}">Add a new Author</a>
+	{% for author in authors %}
+		<a href = "{{url_for('showBooks', author_id = author.id)}}">
+			<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-10 author-list">
+						<h3>{{author.name}}</h3>
+						<a href="{{url_for('editAuthor', author_id = author.id)}}">Edit</a>
+						<a href="{{url_for('deleteAuthor', author_id = author.id)}}">Delete</a>
+					</div>
+				<div class="col-md-1"></div>
+			</div>
+		</a>
+	{% endfor %}
+{% endblock %}
