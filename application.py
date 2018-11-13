@@ -1,6 +1,13 @@
-from flask import Flask, render_template, request,
-from flask import redirect, jsonify, url_for, flash
-from flask import session as login_session
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    jsonify,
+    url_for,
+    flash
+    session as login_session
+)
 import random
 import string
 
@@ -166,8 +173,8 @@ def gdisconnect():
             json.dumps('Current user not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    url = 'https://accounts.google.com/o/oauth2/revoke\
-        ?token=%s' % login_session['access_token']
+    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s'
+    % login_session['access_token']
     print url
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
@@ -318,7 +325,7 @@ def newBookEntry(author_id):
         session.commit()
         flash('New Book %s Successfully Created' % (newBook.title))
         return redirect(url_for('showBookInformation',
-                        author_id=author_id, book_title=newBook.title))
+                                author_id=author_id, book_title=newBook.title))
     else:
         return render_template('newBook.html', author=authorInContext)
 
@@ -353,7 +360,7 @@ def editBookInformation(author_id, book_title):
             'editBook.html', author=authorInContext, bookToEdit=bookToEdit)
 
 
-# Delete a menu item
+# Delete an author
 @app.route('/authors/<int:author_id>/\
     <string:book_title>/delete/', methods=['GET', 'POST'])
 def deleteBook(author_id, book_title):

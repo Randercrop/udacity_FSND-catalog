@@ -9,6 +9,8 @@ Base = declarative_base()
 
 
 class User(Base):
+    # Creates a user object used for authorizing CRUD operations
+
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
@@ -26,12 +28,15 @@ class User(Base):
 
 
 class Author(Base):
+    # Top level object for the library, it has a list of books
+
     __tablename__ = 'author'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
+    book = relationship('Book', cascade='all, delete-orphan')
 
     @property
     def serialize(self):
@@ -43,6 +48,8 @@ class Author(Base):
 
 
 class Book(Base):
+    # bottom level object, it contains data that we display
+
     __tablename__ = 'book'
 
     id = Column(Integer, primary_key=True)
